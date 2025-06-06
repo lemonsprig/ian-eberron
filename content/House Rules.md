@@ -91,3 +91,4 @@ The _Guidance_ cantrip remains a useful tool, but to support immersion and reaso
     A caster must be **aware** of what the target is doing and be **actively choosing to assist**. If the caster is engaged in their own task or conversation, they cannot casually throw Guidance onto someone else.
 - **Obvious Casting in Social Situations**  
     Casting _Guidance_ involves **verbal and somatic components**. While it may not emit dramatic magical effects, it is noticeable to bystanders—especially in tense or social environments. Using it in front of an NPC may affect their reaction, depending on the situation.
+## Attunement
