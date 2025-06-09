@@ -104,7 +104,7 @@ body[data-slug="cards/index"] {
 
 
   /* === Backgrounds for specific cards === */
-  .section-li:has(a[href="/ian-eberron/cards/Races"]) {
+  .section-li:has(a[href="ian-eberron/cards/Races"]) {
     background-image: url("/ian-eberron/static/images/Races.png");
     background-size: cover;
     background-position: center;
