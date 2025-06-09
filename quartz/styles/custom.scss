@@ -80,19 +80,26 @@ body[data-slug="cards/index"] {
     }
 
     .desc {
-      background: rgba(255, 255, 255, 0.800) !important;
+      background: rgba(255, 255, 255, 0.8) !important;
       opacity: 0.6;
-      padding: 1rem 1rem;
+      padding: 1rem 1.25rem;
       font-weight: bold;
       font-size: 1.2rem;
+      text-align: center;
       width: 100%;
       box-sizing: border-box;
       margin: 0;
       border-top-left-radius: 0.75rem;
       border-top-right-radius: 0.75rem;
       color: #000;
-      text-align: center;
+      z-index: 3;
+      position: relative;
+
+      display: flex;                // ✅ enable flex layout
+      align-items: center;          // ✅ vertical centering
+      justify-content: center;      // ✅ horizontal centering (in case of multi-line)
     }
+
 
     .meta {
       margin-top: auto;
