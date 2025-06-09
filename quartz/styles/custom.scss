@@ -99,8 +99,14 @@ body[data-slug="cards/index"] {
       align-items: center;          // ✅ vertical centering
       justify-content: center;      // ✅ horizontal centering (in case of multi-line)
 
-      line-height: 1.2;
+      line-height: 1;
     }
+
+    .desc > * {
+      margin: 0;
+      vertical-align: middle;      // ✅ fixes baseline positioning
+    }
+
 
 
     .meta {
