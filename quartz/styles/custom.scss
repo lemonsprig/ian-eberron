@@ -108,7 +108,7 @@ body[data-slug="cards/index"] {
   }
 
   /* === Backgrounds applied via frontmatter cssClasses === */
-  .section-li {
+  .section-li.card-races {
     background-image: url("../ian-eberron/static/images/Races.png");
     background-size: cover;
     background-position: center;
