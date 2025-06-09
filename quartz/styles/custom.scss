@@ -109,19 +109,19 @@ body[data-slug="cards/index"] {
 
   /* === Backgrounds applied via frontmatter cssClasses === */
   .section-li.card-races {
-    background-image: url("/static/images/Races.png");
+    background-image: url("../ian-eberron/static/images/Races.png");
     background-size: cover;
     background-position: center;
   }
 
   .section-li.card-lore {
-    background-image: url("/static/images/EberronLore.png");
+    background-image: url("../ian-eberron/static/images/EberronLore.png");
     background-size: cover;
     background-position: center;
   }
 
   .section-li.card-house {
-    background-image: url("/static/images/HouseRules.png");
+    background-image: url("../ian-eberron/static/images/HouseRules.png");
     background-size: cover;
     background-position: center;
   }
