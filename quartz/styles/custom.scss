@@ -104,7 +104,7 @@ body[data-slug="cards/index"] {
 
 
   /* === Backgrounds for specific cards === */
-  .section-li:has(a[href="ian-eberron/cards/Races"]) {
+  .section-li:has(a[href="/ian-eberron/cards/Races"]) {
     background-image: url("/ian-eberron/static/images/Races.png");
     background-size: cover;
     background-position: center;
@@ -116,7 +116,7 @@ body[data-slug="cards/index"] {
     background-position: center;
   }
 
-  .section-li:has(a[href="/cards/House-Rules"]) {
+  .section-li:has(a[href="/ian-eberron/cards/House-Rules"]) {
     background-image: url("/ian-eberron/static/images/HouseRules.png");
     background-size: cover;
     background-position: center;
