@@ -105,19 +105,19 @@ body[data-slug="cards/index"] {
 
   /* === Backgrounds for specific cards === */
   .section-li:has(a[href="../cards/Races"]) {
-    background-image: url("ian-eberron/static/images/Races.png");
+    background-image: url("/static/images/Races.png");
     background-size: cover;
     background-position: center;
   }
 
   .section-li:has(a[href="../cards/Eberron-Lore"]) {
-    background-image: url("ian-eberron/static/images/EberronLore.png");
+    background-image: url("/static/images/EberronLore.png");
     background-size: cover;
     background-position: center;
   }
 
   .section-li:has(a[href="../cards/House-Rules"]) {
-    background-image: url("ian-eberron/static/images/HouseRules.png");
+    background-image: url("/static/images/HouseRules.png");
     background-size: cover;
     background-position: center;
   }
