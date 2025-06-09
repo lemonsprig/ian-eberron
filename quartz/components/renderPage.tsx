@@ -264,6 +264,9 @@ export function renderPage(
           </Body>
         </div>
       </body>
+
+      <script src="/ian-eberron/static/js/custom.js"></script>
+
       {pageResources.js
         .filter((resource) => resource.loadTime === "afterDOMReady")
         .map((res) => JSResourceToScriptElement(res))}

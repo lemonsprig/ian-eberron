@@ -87,6 +87,10 @@ const config: QuartzConfig = {
       }),
       Plugin.Assets(),
       Plugin.Static(),
+      Plugin.CustomHTML({
+        head:[],
+        bodyEnd: [ `<script src="/ian-eberron/static/js/custom.js"></script>`],
+      }),
       Plugin.Favicon(),
       Plugin.NotFoundPage(),
       // Comment out CustomOgImages to speed up build time
