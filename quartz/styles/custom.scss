@@ -1,3 +1,133 @@
 @use "./base.scss";
 
-// put your custom CSS here!
+// === Quartz Custom Card Styling === //
+
+/* === Card Grid Layout === */
+.section-ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0;
+}
+
+/* === Base Card Styling === */
+.section-li {
+  background: #ffffff;
+  border-radius: 0.75rem;
+  padding: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+.section-li:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.section-li h3 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.section-li a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* === Cards Page Specific Styling === */
+body[data-slug="cards/index"] {
+
+  /* === Shared layout for image-backed cards === */
+  .section-li:has(.internal[href^="../cards/"]) {
+    //height: 200px;
+    aspect-ratio: 1 / 1;
+    height: auto;
+    color: black;
+    position: relative;
+    overflow: hidden;
+
+    /* Light fade overlay */
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.5);
+      transition: background 0.3s ease;
+      z-index: 1;
+    }
+
+    &:hover::before {
+      background: rgba(255, 255, 255, 0);
+    }
+
+    /* === Layout: title on top, date at bottom === */
+    .section {
+      display: flex;
+      flex-direction: column-reverse; // ✅ flip so .desc appears visually on top
+      height: 100%;
+      width: 100%;
+      position: relative;
+      z-index: 2;
+    }
+
+    .desc {
+      background: rgba(255, 255, 255, 0.800) !important; /* ✅ match meta */
+      opacity: 0.6;
+      padding: 0.5rem 1rem;
+      font-weight: bold;
+      font-size: 1.2rem;
+      width: 100%;
+      box-sizing: border-box;
+      margin: 0;
+      border-top-left-radius: 0.75rem;
+      border-top-right-radius: 0.75rem;
+      color: #000; /* ✅ ensure readability */
+      text-align: center;
+    }
+
+    .meta {
+      margin-top: auto; // ✅ pushes to visual bottom
+      width: 100%;
+      padding: 0.25rem 1rem;
+      font-size: 0.8rem;
+      color: #555;
+      background: rgba(255, 255, 255, 0.85);
+      box-sizing: border-box;
+      border-bottom-left-radius: 0.75rem;
+      border-bottom-right-radius: 0.75rem;
+    }
+  }
+
+
+  /* === Backgrounds for specific cards === */
+  .section-li:has(a[href="../cards/Races"]) {
+    background-image: url("/static/images/Races.png");
+    background-size: cover;
+    background-position: center;
+  }
+
+  .section-li:has(a[href="../cards/Eberron-Lore"]) {
+    background-image: url("/static/images/EberronLore.png");
+    background-size: cover;
+    background-position: center;
+  }
+
+  .section-li:has(a[href="../cards/House-Rules"]) {
+    background-image: url("/static/images/HouseRules.png");
+    background-size: cover;
+    background-position: center;
+  }
+}
+
+body[data-slug="cards/index"] .section-li .meta {
+  visibility: hidden;
+  height: 1rem;
+  margin-top: auto;
+  padding: 0;
+  background: none;
+  opacity: 0;
+}

@@ -51,6 +51,7 @@ const config: QuartzConfig = {
           textHighlight: "#b3aa0288",
         },
       },
+      customCss: ["styles/custom.scss"],  // ✅ add this line
     },
   },
   plugins: {
