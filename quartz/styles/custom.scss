@@ -21,6 +21,15 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   overflow: hidden;
   position: relative;
+
+  /* Make entire card a link */
+  a:first-of-type {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    text-decoration: none;
+    color: inherit;
+  }
 }
 
 .section-li:hover {
@@ -43,7 +52,6 @@ body[data-slug="cards/index"] {
 
   /* === Shared layout for image-backed cards === */
   .section-li:has(.internal[href^="../cards/"]) {
-    //height: 200px;
     aspect-ratio: 1 / 1;
     height: auto;
     color: black;
@@ -67,15 +75,15 @@ body[data-slug="cards/index"] {
     /* === Layout: title on top, date at bottom === */
     .section {
       display: flex;
-      flex-direction: column-reverse; // ✅ flip so .desc appears visually on top
+      flex-direction: column-reverse;
       height: 100%;
       width: 100%;
       position: relative;
-      z-index: 2;
+      z-index: 3; // content above the full-card link
     }
 
     .desc {
-      background: rgba(255, 255, 255, 0.800) !important; /* ✅ match meta */
+      background: rgba(255, 255, 255, 0.800) !important;
       opacity: 0.6;
       padding: 0.5rem 1rem;
       font-weight: bold;
@@ -85,12 +93,12 @@ body[data-slug="cards/index"] {
       margin: 0;
       border-top-left-radius: 0.75rem;
       border-top-right-radius: 0.75rem;
-      color: #000; /* ✅ ensure readability */
+      color: #000;
       text-align: center;
     }
 
     .meta {
-      margin-top: auto; // ✅ pushes to visual bottom
+      margin-top: auto;
       width: 100%;
       padding: 0.25rem 1rem;
       font-size: 0.8rem;
@@ -102,22 +110,21 @@ body[data-slug="cards/index"] {
     }
   }
 
-
   /* === Backgrounds for specific cards === */
   .section-li:has(a[href="/ian-eberron/cards/Races"]) {
-    background-image: url("/ian-eberron/static/images/Races.png");
+    background-image: url("/ian-eberron/images/Races.png");
     background-size: cover;
     background-position: center;
   }
 
   .section-li:has(a[href="/ian-eberron/cards/Eberron-Lore"]) {
-    background-image: url("/ian-eberron/static/images/EberronLore.png");
+    background-image: url("/ian-eberron/images/EberronLore.png");
     background-size: cover;
     background-position: center;
   }
 
   .section-li:has(a[href="/ian-eberron/cards/House-Rules"]) {
-    background-image: url("/ian-eberron/static/images/HouseRules.png");
+    background-image: url("/ian-eberron/images/HouseRules.png");
     background-size: cover;
     background-position: center;
   }
