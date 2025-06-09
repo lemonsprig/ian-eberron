@@ -21,15 +21,6 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   overflow: hidden;
   position: relative;
-
-  /* Make the entire card clickable */
-  a:first-of-type {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    text-decoration: none;
-    color: inherit;
-  }
 }
 
 .section-li:hover {
@@ -52,6 +43,7 @@ body[data-slug="cards/index"] {
 
   /* === Shared layout for image-backed cards === */
   .section-li:has(.internal[href^="../cards/"]) {
+    //height: 200px;
     aspect-ratio: 1 / 1;
     height: auto;
     color: black;
@@ -75,15 +67,15 @@ body[data-slug="cards/index"] {
     /* === Layout: title on top, date at bottom === */
     .section {
       display: flex;
-      flex-direction: column-reverse;
+      flex-direction: column-reverse; // ✅ flip so .desc appears visually on top
       height: 100%;
       width: 100%;
       position: relative;
-      z-index: 3; // Ensure it's above the full-card link
+      z-index: 2;
     }
 
     .desc {
-      background: rgba(255, 255, 255, 0.800) !important;
+      background: rgba(255, 255, 255, 0.800) !important; /* ✅ match meta */
       opacity: 0.6;
       padding: 0.5rem 1rem;
       font-weight: bold;
@@ -93,12 +85,12 @@ body[data-slug="cards/index"] {
       margin: 0;
       border-top-left-radius: 0.75rem;
       border-top-right-radius: 0.75rem;
-      color: #000;
+      color: #000; /* ✅ ensure readability */
       text-align: center;
     }
 
     .meta {
-      margin-top: auto;
+      margin-top: auto; // ✅ pushes to visual bottom
       width: 100%;
       padding: 0.25rem 1rem;
       font-size: 0.8rem;
@@ -109,6 +101,7 @@ body[data-slug="cards/index"] {
       border-bottom-right-radius: 0.75rem;
     }
   }
+
 
   /* === Backgrounds for specific cards === */
   .section-li:has(a[href="/ian-eberron/cards/Races"]) {
