@@ -22,7 +22,7 @@
   overflow: hidden;
   position: relative;
 
-  /* Make entire card a link */
+  /* Make the entire card clickable */
   a:first-of-type {
     position: absolute;
     inset: 0;
@@ -79,7 +79,7 @@ body[data-slug="cards/index"] {
       height: 100%;
       width: 100%;
       position: relative;
-      z-index: 3; // content above the full-card link
+      z-index: 3; // Ensure it's above the full-card link
     }
 
     .desc {
