@@ -1,9 +1,0 @@
----
-redirect: cards/index
----
-
-
-
-
-
-
