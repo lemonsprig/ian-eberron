@@ -1,4 +1,4 @@
-import { QuartzComponentConstructor, QuartzComponentProps } from "../quartz/components/types"
+import { QuartzComponentConstructor, QuartzComponentProps } from "./types"
 
 export const FolderCardGrid: QuartzComponentConstructor = (_opts) => {
   return ({ allContent }: QuartzComponentProps) => {
