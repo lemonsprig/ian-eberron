@@ -13,5 +13,5 @@ Here are the main sections of this site:
 ---
 [[Races & Identity]]
 
----
-<FolderCardGrid />
+
+<Darkmode />
