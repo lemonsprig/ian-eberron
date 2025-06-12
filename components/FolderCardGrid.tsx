@@ -1,4 +1,4 @@
-import { QuartzComponentConstructor, QuartzComponentProps } from "./types"
+import { QuartzComponentConstructor, QuartzComponentProps } from "../quartz/components/types"
 
 export const FolderCardGrid: QuartzComponentConstructor = (_opts) => {
   return ({ allContent }: QuartzComponentProps) => {
@@ -12,11 +12,12 @@ export const FolderCardGrid: QuartzComponentConstructor = (_opts) => {
 
     return (
       <div class="folder-grid">
-        {topFolders.map((folder: string) => (
+        <p>hello</p>
+        {/* {topFolders.map((folder: string) => (
           <a href={`/${folder}/`} class="folder-card">
             <h2>{folder.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase())}</h2>
           </a>
-        ))}
+        ))} */}
       </div>
     )
   }
