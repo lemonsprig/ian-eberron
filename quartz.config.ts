@@ -51,10 +51,12 @@ const config: QuartzConfig = {
           textHighlight: "#b3aa0288",
         },
       },
-      customCss: ["styles/custom.scss"],  // ✅ add this line
+      customCss: ["styles/custom.scss"],
     },
   },
+
   plugins: {
+    // ✅ Use array format for Quartz 4.5.1, now with component support
     transformers: [
       Plugin.FrontMatter(),
       Plugin.CreatedModifiedDate({
@@ -73,8 +75,11 @@ const config: QuartzConfig = {
       Plugin.CrawlLinks({ markdownLinkResolution: "shortest" }),
       Plugin.Description(),
       Plugin.Latex({ renderEngine: "katex" }),
+      Plugin.Components(), // ✅ Enables <Component /> tags in markdown
     ],
+
     filters: [Plugin.RemoveDrafts()],
+
     emitters: [
       Plugin.AliasRedirects(),
       Plugin.ComponentResources(),
