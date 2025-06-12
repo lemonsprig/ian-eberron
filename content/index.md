@@ -8,4 +8,9 @@
 Here are the main sections of this site:
 
 [[Mechanics/]]
-<FolderTree depth={1} />
+[[Races & Identity/]]
+
+---
+[[Races & Identity]]
+
+
