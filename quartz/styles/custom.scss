@@ -247,6 +247,160 @@
   }
 }
 
+// Add this to your existing CSS file or create a new one in quartz/styles/
+
+// === TABLE STYLING === //
+
+/* Base table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Header styling */
+table thead {
+  background: var(--secondary);
+  color: var(--light);
+  font-weight: 600;
+}
+
+table thead th {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 2px solid var(--lightgray);
+  font-size: 0.95rem;
+}
+
+/* Row styling */
+table tbody tr {
+  border-bottom: 1px solid var(--lightgray);
+  transition: background-color 0.2s ease;
+}
+
+table tbody tr:hover {
+  background-color: var(--lightgray);
+}
+
+table tbody tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+table tbody td {
+  padding: 10px 15px;
+  border-bottom: 1px solid var(--lightgray);
+}
+
+/* Fixed column widths - customize these as needed */
+table.fixed-width {
+  table-layout: fixed;
+}
+
+table.fixed-width th:nth-child(1),
+table.fixed-width td:nth-child(1) {
+  width: 20%;
+}
+
+table.fixed-width th:nth-child(2),
+table.fixed-width td:nth-child(2) {
+  width: 30%;
+}
+
+table.fixed-width th:nth-child(3),
+table.fixed-width td:nth-child(3) {
+  width: 25%;
+}
+
+table.fixed-width th:nth-child(4),
+table.fixed-width td:nth-child(4) {
+  width: 25%;
+}
+
+/* Specific table styles using CSS classes */
+table.stats-table {
+  background: #f8f9fa;
+  border: 2px solid #dee2e6;
+}
+
+table.stats-table thead {
+  background: #343a40;
+  color: white;
+}
+
+table.stats-table tbody tr:nth-child(even) {
+  background: #e9ecef;
+}
+
+table.highlight-table {
+  border: 2px solid var(--secondary);
+}
+
+table.highlight-table thead {
+  background: var(--secondary);
+  color: white;
+}
+
+table.highlight-table tbody tr:hover {
+  background: rgba(var(--secondary-rgb), 0.1);
+}
+
+/* Responsive tables */
+@media (max-width: 768px) {
+  table {
+    font-size: 0.8rem;
+  }
+  
+  table thead th,
+  table tbody td {
+    padding: 8px 10px;
+  }
+  
+  /* Make tables horizontally scrollable on mobile */
+  .table-container {
+    overflow-x: auto;
+    margin: 1rem 0;
+  }
+}
+
+/* Dark mode support */
+.darkmode {
+  table {
+    background: var(--dark);
+    border-color: var(--darkgray);
+  }
+  
+  table thead {
+    background: var(--darkgray);
+    color: var(--light);
+  }
+  
+  table tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.05);
+  }
+  
+  table tbody tr:hover {
+    background: var(--darkgray);
+  }
+  
+  table tbody td {
+    border-color: var(--darkgray);
+  }
+}
+
+
+
+
+
+
+
+
+
 // Responsive design
 @media (max-width: 768px) {
   .folder-cards-grid {
