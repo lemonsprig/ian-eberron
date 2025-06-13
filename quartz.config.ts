@@ -50,12 +50,6 @@ const config: QuartzConfig = {
       },
       customCss: ["styles/custom.scss"],
     },
-    pages: [
-      {
-        name: "index",
-        layout: "HomePage",
-      },
-    ],
   },
 
   plugins: {
