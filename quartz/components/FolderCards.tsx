@@ -34,8 +34,8 @@ export default (() => {
 
     // Define custom mappings for your folders
     const folderImageMap: Record<string, string> = {
-      'eberronlore': '/static/images/EberronLore.png',
-      'houserules': '/static/images/HouseRules.png',
+      'eberron-lore': '/static/images/EberronLore.png',
+      'house-rules': '/static/images/HouseRules.png',
       'races': '/static/images/Races.png',
     }
 
@@ -54,7 +54,7 @@ export default (() => {
           name: displayName,
           path: `/${folder}/`,
           description: `Explore ${displayName} content`,
-          image: folderImageMap[folderLower] || '/static/images/default-folder.png'
+          image: folderImageMap[folder.toLowerCase()] || '/static/images/default-folder.png'
         }
       })
       .sort((a, b) => a.name.localeCompare(b.name))
