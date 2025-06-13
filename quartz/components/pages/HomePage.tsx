@@ -1,8 +1,8 @@
 import { QuartzComponentConstructor, QuartzComponentProps } from "../types"
 import FolderCardGrid from "../FolderCardGrid"
 
-const HomePage: QuartzComponentConstructor = () => {
-  const Component = (_props: QuartzComponentProps) => {
+export default (() => {
+  function HomePage(_props: QuartzComponentProps) {
     return (
       <main class="page">
         <article>
@@ -12,8 +12,5 @@ const HomePage: QuartzComponentConstructor = () => {
     )
   }
 
-  return Component
-}
-
-export default HomePage
-
+  return HomePage
+}) satisfies QuartzComponentConstructor
