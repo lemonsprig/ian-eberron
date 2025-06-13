@@ -48,7 +48,7 @@ export default (() => {
           name: folder.charAt(0).toUpperCase() + folder.slice(1), // Capitalize first letter
           path: `/${folder}/`,
           description: `Explore ${folder} content`, // Default description
-          image: folderImageMap[folderLower] || '/static/images/default-folder.svg'
+          image: folderImageMap[folderLower] || '/static/images/default-folder.png'
         }
       })
       .sort((a, b) => a.name.localeCompare(b.name))
