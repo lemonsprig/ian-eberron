@@ -57,6 +57,11 @@ export default (() => {
       return null
     }
 
+    const handleImageError = (e: Event) => {
+      const target = e.target as HTMLImageElement
+      target.src = '/static/images/default-folder.png'
+    }
+
     return (
       <div class={classNames(displayClass, "folder-cards-container")}>
         <h2>Explore Topics</h2>
@@ -68,7 +73,7 @@ export default (() => {
                   <img 
                     src={resolveRelative(fileData.slug!, card.image!)} 
                     alt={`${card.name} icon`}
-                    onError="this.src='/static/images/default-folder.png'"
+                    onError={handleImageError}
                   />
                 </div>
                 <div class="folder-card-content">
