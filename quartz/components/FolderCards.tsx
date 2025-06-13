@@ -5,8 +5,8 @@ import { resolveRelative } from "../util/path"
 interface FolderCardData {
   name: string
   path: string
-  description: string
-  image: string
+  description?: string
+  image?: string
 }
 
 export default (() => {
@@ -34,11 +34,9 @@ export default (() => {
 
     // Define custom mappings for your folders
     const folderImageMap: Record<string, string> = {
-      'eberronlore': 'static/images/EberronLore.png',
-      'houserules': 'static/images/HouseRules.png',
-      'races': 'static/images/Races.png',
-      'races&identity': 'static/images/races.png',
-      'races & identity': 'static/images/races.png',
+      'eberronlore': '/static/images/EberronLore.png',
+      'houserules': '/static/images/HouseRules.png',
+      'races': '/static/images/Races.png',
     }
 
     // Convert to array and create card data
@@ -68,12 +66,9 @@ export default (() => {
               <a href={resolveRelative(fileData.slug!, card.path)} class="folder-card-link">
                 <div class="folder-card-image">
                   <img 
-                    src={resolveRelative(fileData.slug!, card.image)} 
+                    src={resolveRelative(fileData.slug!, card.image!)} 
                     alt={`${card.name} icon`}
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.src = resolveRelative(fileData.slug!, 'static/images/default-folder.png');
-                    }}
+                    onError="this.src='/static/images/default-folder.png'"
                   />
                 </div>
                 <div class="folder-card-content">
