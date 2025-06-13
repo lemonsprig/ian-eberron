@@ -189,7 +189,9 @@ body[data-slug="cards/index"] .section-li .meta {
 }
 
 .folder-card-image {
-  height: 160px;
+  //height: 160px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
   background: var(--lightgray);
   display: flex;
   align-items: center;
