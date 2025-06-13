@@ -1,7 +1,7 @@
 import { QuartzComponentConstructor, QuartzComponentProps } from "./types"
 
 const FolderCardGrid: QuartzComponentConstructor = () => {
-  function FolderCardGrid(_props: QuartzComponentProps) {
+  const Component = (_props: QuartzComponentProps) => {
     return (
       <div>
         <p>Hello from FolderCardGrid!</p>
@@ -9,7 +9,8 @@ const FolderCardGrid: QuartzComponentConstructor = () => {
     )
   }
 
-  return FolderCardGrid
+  return Component
 }
 
 export default FolderCardGrid
+
