@@ -1,11 +1,6 @@
 import { QuartzConfig } from "./quartz/cfg"
 import * as Plugin from "./quartz/plugins"
 
-/**
- * Quartz 4 Configuration
- *
- * See https://quartz.jzhao.xyz/configuration for more information.
- */
 const config: QuartzConfig = {
   configuration: {
     pageTitle: "Quartz 4",
@@ -53,10 +48,15 @@ const config: QuartzConfig = {
       },
       customCss: ["styles/custom.scss"],
     },
+    pages: [
+      {
+        name: "index",
+        layout: "HomePage",
+      },
+    ],
   },
 
   plugins: {
-    // ✅ Use array format for Quartz 4.5.1, now with component support
     transformers: [
       Plugin.FrontMatter(),
       Plugin.CreatedModifiedDate({
@@ -75,11 +75,8 @@ const config: QuartzConfig = {
       Plugin.CrawlLinks({ markdownLinkResolution: "shortest" }),
       Plugin.Description(),
       Plugin.Latex({ renderEngine: "katex" }),
-      Plugin.Components(), // ✅ Enables <Component /> tags in markdown
     ],
-
     filters: [Plugin.RemoveDrafts()],
-
     emitters: [
       Plugin.AliasRedirects(),
       Plugin.ComponentResources(),
@@ -94,7 +91,6 @@ const config: QuartzConfig = {
       Plugin.Static(),
       Plugin.Favicon(),
       Plugin.NotFoundPage(),
-      // Comment out CustomOgImages to speed up build time
       Plugin.CustomOgImages(),
     ],
   },
