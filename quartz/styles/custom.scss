@@ -3,146 +3,145 @@
 // === Quartz Custom Card Styling === //
 
 /* === Card Grid Layout === */
-// .section-ul {
-//   display: grid;
-//   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-//   gap: 1.5rem;
-//   list-style: none;
-//   padding: 0;
-//   margin: 2rem 0;
-// }
+.section-ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0;
+}
 
-// /* === Base Card Styling === */
-// .section-li {
-//   background: #ffffff;
-//   border-radius: 0.75rem;
-//   padding: 0;
-//   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-//   transition: transform 0.2s ease, box-shadow 0.2s ease;
-//   overflow: hidden;
-//   position: relative;
-// }
+/* === Base Card Styling === */
+.section-li {
+  background: #ffffff;
+  border-radius: 0.75rem;
+  padding: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+  position: relative;
+}
 
-// .section-li:hover {
-//   transform: translateY(-4px);
-//   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-// }
+.section-li:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
 
-// .section-li h3 {
-//   margin: 0;
-//   font-size: 1.25rem;
-// }
+.section-li h3 {
+  margin: 0;
+  font-size: 1.25rem;
+}
 
-// .section-li a {
-//   text-decoration: none;
-//   color: inherit;
-// }
+.section-li a {
+  text-decoration: none;
+  color: inherit;
+}
 
-// /* === Cards Page Specific Styling === */
-// body[data-slug="cards/index"] {
-//   .section-li {
-//     aspect-ratio: 1 / 1;
-//     height: auto;
-//     color: black;
-//     position: relative;
-//     overflow: hidden;
+/* === Cards Page Specific Styling === */
+body[data-slug="cards/index"] {
+  .section-li {
+    aspect-ratio: 1 / 1;
+    height: auto;
+    color: black;
+    position: relative;
+    overflow: hidden;
 
-//     &::before {
-//       content: "";
-//       position: absolute;
-//       inset: 0;
-//       background: rgba(255, 255, 255, 0.5);
-//       transition: background 0.3s ease;
-//       z-index: 1;
-//     }
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.5);
+      transition: background 0.3s ease;
+      z-index: 1;
+    }
 
-//     &:hover::before {
-//       background: rgba(255, 255, 255, 0);
-//     }
+    &:hover::before {
+      background: rgba(255, 255, 255, 0);
+    }
 
-//     .section {
-//       display: flex;
-//       flex-direction: column-reverse;
-//       height: 100%;
-//       width: 100%;
-//       position: relative;
-//       z-index: 3;
-//     }
+    .section {
+      display: flex;
+      flex-direction: column-reverse;
+      height: 100%;
+      width: 100%;
+      position: relative;
+      z-index: 3;
+    }
 
-//     .desc {
-//       display: flex;
-//       justify-content: center;
-//       align-items: center;
-//       background: rgba(255, 255, 255, 0.8) !important;
-//       opacity: 0.6;
-//       padding: 0.5rem;
-//       //height: 4rem;
-//       width: 100%;
-//       text-align: center;
-//       box-sizing: border-box;
-//       color: #000;
-//       z-index: 3;
-//       position: relative;
-//       border-top-left-radius: 0.75rem;
-//       border-top-right-radius: 0.75rem;
-//     }
+    .desc {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.8) !important;
+      opacity: 0.6;
+      padding: 0.5rem;
+      //height: 4rem;
+      width: 100%;
+      text-align: center;
+      box-sizing: border-box;
+      color: #000;
+      z-index: 3;
+      position: relative;
+      border-top-left-radius: 0.75rem;
+      border-top-right-radius: 0.75rem;
+    }
 
-//     .desc h3 {
-//       margin: 0;
-//       padding: 0;
-//       font-size: 1.2rem;
-//       font-weight: bold;
-//       line-height: 1.2;
-//     }
+    .desc h3 {
+      margin: 0;
+      padding: 0;
+      font-size: 1.2rem;
+      font-weight: bold;
+      line-height: 1.2;
+    }
 
-//     .desc h3 a {
-//       text-decoration: none;
-//       color: inherit;
-//     }
+    .desc h3 a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-//     .meta {
-//       margin-top: auto;
-//       width: 100%;
-//       padding: 0.25rem 1rem;
-//       font-size: 0.8rem;
-//       color: #555;
-//       background: rgba(255, 255, 255, 0.85);
-//       box-sizing: border-box;
-//       border-bottom-left-radius: 0.75rem;
-//       border-bottom-right-radius: 0.75rem;
-//     }
-//   }
+    .meta {
+      margin-top: auto;
+      width: 100%;
+      padding: 0.25rem 1rem;
+      font-size: 0.8rem;
+      color: #555;
+      background: rgba(255, 255, 255, 0.85);
+      box-sizing: border-box;
+      border-bottom-left-radius: 0.75rem;
+      border-bottom-right-radius: 0.75rem;
+    }
+  }
 
-//   /* === Backgrounds applied via frontmatter cssClasses === */
-//   .section-li.card-races {
-//     background-image: url("../ian-eberron/static/images/Races.png");
-//     background-size: cover;
-//     background-position: center;
-//   }
+  /* === Backgrounds applied via frontmatter cssClasses === */
+  .section-li.card-races {
+    background-image: url("../ian-eberron/static/images/Races.png");
+    background-size: cover;
+    background-position: center;
+  }
 
-//   .section-li.card-lore {
-//     background-image: url("../ian-eberron/static/images/EberronLore.png");
-//     background-size: cover;
-//     background-position: center;
-//   }
+  .section-li.card-lore {
+    background-image: url("../ian-eberron/static/images/EberronLore.png");
+    background-size: cover;
+    background-position: center;
+  }
 
-//   .section-li.card-house {
-//     background-image: url("../ian-eberron/static/images/HouseRules.png");
-//     background-size: cover;
-//     background-position: center;
-//   }
-// }
+  .section-li.card-house {
+    background-image: url("../ian-eberron/static/images/HouseRules.png");
+    background-size: cover;
+    background-position: center;
+  }
+}
 
-// /* === Hide .meta on cards page === */
-// body[data-slug="cards/index"] .section-li .meta {
-//   visibility: hidden;
-//   height: 1rem;
-//   margin-top: auto;
-//   padding: 0;
-//   background: none;
-//   opacity: 0;
-// }
-
+/* === Hide .meta on cards page === */
+body[data-slug="cards/index"] .section-li .meta {
+  visibility: hidden;
+  height: 1rem;
+  margin-top: auto;
+  padding: 0;
+  background: none;
+  opacity: 0;
+}
 
 // Folder Cards Component Styles
 .folder-cards-container {
@@ -189,7 +188,6 @@
 }
 
 .folder-card-image {
-  //height: 160px;
   width: 100%;
   aspect-ratio: 1 / 1;
   background: var(--lightgray);
@@ -247,9 +245,21 @@
   }
 }
 
-// Add this to your existing CSS file or create a new one in quartz/styles/
-
-// Add this to your existing CSS file or create a new one in quartz/styles/
+// Responsive design
+@media (max-width: 768px) {
+  .folder-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .folder-card-image {
+    aspect-ratio: 1 / 1; // Maintains square aspect ratio even on mobile
+  }
+  
+  .folder-card-content {
+    padding: 1rem;
+  }
+}
 
 // === TABLE STYLING === //
 
@@ -262,7 +272,7 @@ table {
   background: var(--light);
   border: 1px solid var(--lightgray);
   border-radius: 8px;
-  overflow: hidden;
+  overflow: visible;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -352,6 +362,26 @@ table.highlight-table tbody tr:hover {
   background: rgba(var(--secondary-rgb), 0.1);
 }
 
+/* Only add scrollable container when explicitly needed */
+.table-container {
+  overflow-x: auto;
+  margin: 1rem 0;
+  width: 100%;
+}
+
+.table-container::-webkit-scrollbar {
+  height: 6px;
+}
+
+.table-container::-webkit-scrollbar-track {
+  background: var(--lightgray);
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background: var(--gray);
+  border-radius: 3px;
+}
+
 /* Responsive tables */
 @media (max-width: 768px) {
   table {
@@ -361,26 +391,6 @@ table.highlight-table tbody tr:hover {
   table thead th,
   table tbody td {
     padding: 4px 6px;
-  }
-  
-  /* Make tables horizontally scrollable only when content overflows */
-  .table-container {
-    overflow-x: auto;
-    margin: 1rem 0;
-    width: 100%;
-  }
-  
-  .table-container::-webkit-scrollbar {
-    height: 6px;
-  }
-  
-  .table-container::-webkit-scrollbar-track {
-    background: var(--lightgray);
-  }
-  
-  .table-container::-webkit-scrollbar-thumb {
-    background: var(--gray);
-    border-radius: 3px;
   }
 }
 
@@ -406,28 +416,5 @@ table.highlight-table tbody tr:hover {
   
   table tbody td {
     border-color: var(--darkgray);
-  }
-}
-
-
-
-
-
-
-
-
-// Responsive design
-@media (max-width: 768px) {
-  .folder-cards-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  
-  .folder-card-image {
-    height: 100px;
-  }
-  
-  .folder-card-content {
-    padding: 1rem;
   }
 }
