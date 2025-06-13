@@ -142,3 +142,123 @@ body[data-slug="cards/index"] .section-li .meta {
   background: none;
   opacity: 0;
 }
+
+
+// Folder Cards Component Styles
+.folder-cards-container {
+  margin: 2rem 0;
+  
+  h2 {
+    margin-bottom: 1.5rem;
+    color: var(--dark);
+    font-size: 1.5rem;
+  }
+}
+
+.folder-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 1rem 0;
+}
+
+.folder-card {
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border-color: var(--secondary);
+  }
+}
+
+.folder-card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+  
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.folder-card-image {
+  height: 120px;
+  background: var(--lightgray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    background: var(--light);
+  }
+  
+  .folder-card:hover & img {
+    transform: scale(1.05);
+  }
+}
+
+.folder-card-content {
+  padding: 1.25rem;
+}
+
+.folder-card-title {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--dark);
+  line-height: 1.3;
+}
+
+.folder-card-description {
+  margin: 0;
+  color: var(--gray);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+// Dark mode support
+.darkmode {
+  .folder-card {
+    background: var(--dark);
+    
+    &:hover {
+      background: var(--darkgray);
+    }
+  }
+  
+  .folder-card-title {
+    color: var(--light);
+  }
+  
+  .folder-card-description {
+    color: var(--lightgray);
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .folder-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .folder-card-image {
+    height: 100px;
+  }
+  
+  .folder-card-content {
+    padding: 1rem;
+  }
+}

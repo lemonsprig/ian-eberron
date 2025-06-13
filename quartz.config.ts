@@ -1,5 +1,7 @@
 import { QuartzConfig } from "./quartz/cfg"
 import * as Plugin from "./quartz/plugins"
+import * as Component from "./quartz/components"
+import FolderCards from "./quartz/components/FolderCards"
 
 const config: QuartzConfig = {
   configuration: {
@@ -80,7 +82,27 @@ const config: QuartzConfig = {
     emitters: [
       Plugin.AliasRedirects(),
       Plugin.ComponentResources(),
-      Plugin.ContentPage(),
+      Plugin.ContentPage({
+        beforeBody: [
+          Component.Breadcrumbs(), 
+          Component.ArticleTitle(), 
+          Component.ContentMeta(), 
+          Component.TagList(),
+          FolderCards() // Add the FolderCards component here
+        ],
+        left: [
+          Component.PageTitle(),
+          Component.MobileOnly(Component.Spacer()),
+          Component.Search(),
+          Component.Darkmode(),
+          Component.DesktopOnly(Component.Explorer()),
+        ],
+        right: [
+          Component.Graph(),
+          Component.DesktopOnly(Component.TableOfContents()),
+          Component.Backlinks(),
+        ],
+      }),
       Plugin.FolderPage(),
       Plugin.TagPage(),
       Plugin.ContentIndex({
