@@ -21,6 +21,7 @@ The following playable races are available to players
 | Gnome               | Player's Handbook (PHB) |
 | Half-Elf (Khoravar) | Player's Handbook (PHB) |
 | Half-Orc            | Player's Handbook (PHB) |
+
 ⚠️ _Note: In Eberron, Half-Elves (Khoravar) are a distinct cultural group, not just mixed heritage individuals._
 
 **Eberron Specific Races**
