@@ -44,11 +44,17 @@ export default (() => {
       .filter(folder => folder && folder !== 'index')
       .map(folder => {
         const folderLower = folder.toLowerCase()
+        // Convert dashes back to spaces and title case
+        const displayName = folder
+          .split('-')
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+          .join(' ')
+        
         return {
-          name: folder.charAt(0).toUpperCase() + folder.slice(1), // Capitalize first letter
+          name: displayName,
           path: `/${folder}/`,
-          description: `Explore ${folder} content`, // Default description
-          image: folderImageMap[folderLower] || 'static/images/default-folder.png'
+          description: `Explore ${displayName} content`,
+          image: folderImageMap[folderLower] || 'static/images/default-folder.svg'
         }
       })
       .sort((a, b) => a.name.localeCompare(b.name))
