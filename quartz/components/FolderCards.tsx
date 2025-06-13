@@ -34,11 +34,11 @@ export default (() => {
 
     // Define custom mappings for your folders
     const folderImageMap: Record<string, string> = {
-      'eberronlore': '/static/images/EberronLore.png',
-      'houserules': '/static/images/HouseRules.png',
-      'races': '/static/images/Races.png',
-      'races&identity': '/static/images/races.png',
-      'races & identity': '/static/images/races.png',
+      'eberronlore': 'static/images/EberronLore.png',
+      'houserules': 'static/images/HouseRules.png',
+      'races': 'static/images/Races.png',
+      'races&identity': 'static/images/races.png',
+      'races & identity': 'static/images/races.png',
     }
 
     // Convert to array and create card data
@@ -72,7 +72,7 @@ export default (() => {
                     alt={`${card.name} icon`}
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
-                      target.src = resolveRelative(fileData.slug!, '/static/images/default-folder.png');
+                      target.src = resolveRelative(fileData.slug!, 'static/images/default-folder.png');
                     }}
                   />
                 </div>
