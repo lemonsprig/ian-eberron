@@ -34,9 +34,9 @@ export default (() => {
 
     // Define custom mappings for your folders
     const folderImageMap: Record<string, string> = {
-      'eberronlore': 'static/images/EberronLore.png',
-      'houserules': 'static/images/HouseRules.png',
-      'races': 'static/images/Races.png',
+      'eberronlore': '/static/images/EberronLore.png',
+      'houserules': '/static/images/HouseRules.png',
+      'races': '/static/images/Races.png',
     }
 
     // Convert to array and create card data
@@ -54,7 +54,7 @@ export default (() => {
           name: displayName,
           path: `/${folder}/`,
           description: `Explore ${displayName} content`,
-          image: folderImageMap[folderLower] || 'static/images/default-folder.svg'
+          image: folderImageMap[folderLower] || '/static/images/default-folder.svg'
         }
       })
       .sort((a, b) => a.name.localeCompare(b.name))
@@ -65,7 +65,7 @@ export default (() => {
 
     const handleImageError = (e: Event) => {
       const target = e.target as HTMLImageElement
-      target.src = resolveRelative(fileData.slug!, 'static/images/default-folder.png')
+      target.src = '/static/images/default-folder.png'
     }
 
     return (
@@ -77,7 +77,7 @@ export default (() => {
               <a href={resolveRelative(fileData.slug!, card.path)} class="folder-card-link">
                 <div class="folder-card-image">
                   <img 
-                    src={resolveRelative(fileData.slug!, card.image!)} 
+                    src={card.image!} 
                     alt={`${card.name} icon`}
                     onError={handleImageError}
                   />
