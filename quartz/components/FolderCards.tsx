@@ -34,9 +34,9 @@ export default (() => {
 
     // Define custom mappings for your folders
     const folderImageMap: Record<string, string> = {
-      'eberronlore': '/static/images/EberronLore.png',
-      'houserules': '/static/images/HouseRules.png',
-      'races': '/static/images/Races.png',
+      'eberronlore': 'static/images/EberronLore.png',
+      'houserules': 'static/images/HouseRules.png',
+      'races': 'static/images/Races.png',
     }
 
     // Convert to array and create card data
@@ -48,7 +48,7 @@ export default (() => {
           name: folder.charAt(0).toUpperCase() + folder.slice(1), // Capitalize first letter
           path: `/${folder}/`,
           description: `Explore ${folder} content`, // Default description
-          image: folderImageMap[folderLower] || '/static/images/default-folder.svg'
+          image: folderImageMap[folderLower] || 'static/images/default-folder.svg'
         }
       })
       .sort((a, b) => a.name.localeCompare(b.name))
@@ -59,7 +59,7 @@ export default (() => {
 
     const handleImageError = (e: Event) => {
       const target = e.target as HTMLImageElement
-      target.src = '/static/images/default-folder.png'
+      target.src = resolveRelative(fileData.slug!, 'static/images/default-folder.png')
     }
 
     return (
