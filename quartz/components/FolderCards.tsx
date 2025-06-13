@@ -54,7 +54,7 @@ export default (() => {
           name: displayName,
           path: `/${folder}/`,
           description: `Explore ${displayName} content`,
-          image: folderImageMap[folderLower] || '/static/images/default-folder.svg'
+          image: folderImageMap[folderLower] || '/static/images/default-folder.png'
         }
       })
       .sort((a, b) => a.name.localeCompare(b.name))
