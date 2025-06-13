@@ -36,7 +36,7 @@ export default (() => {
     const folderImageMap: Record<string, string> = {
       'eberron-lore': 'static/images/EberronLore.png',
       'house-rules': 'static/images/HouseRules.png',
-      'races-and-identity': 'static/images/Races.png',
+      'races--and--identity': 'static/images/Races.png',
     }
 
     // Convert to array and create card data
