@@ -249,6 +249,8 @@
 
 // Add this to your existing CSS file or create a new one in quartz/styles/
 
+// Add this to your existing CSS file or create a new one in quartz/styles/
+
 // === TABLE STYLING === //
 
 /* Base table styling */
@@ -272,7 +274,7 @@ table thead {
 }
 
 table thead th {
-  padding: 12px 15px;
+  padding: 6px 10px;
   text-align: left;
   border-bottom: 2px solid var(--lightgray);
   font-size: 0.95rem;
@@ -293,7 +295,7 @@ table tbody tr:nth-child(even) {
 }
 
 table tbody td {
-  padding: 10px 15px;
+  padding: 4px 10px;
   border-bottom: 1px solid var(--lightgray);
 }
 
@@ -358,13 +360,27 @@ table.highlight-table tbody tr:hover {
   
   table thead th,
   table tbody td {
-    padding: 8px 10px;
+    padding: 4px 6px;
   }
   
-  /* Make tables horizontally scrollable on mobile */
+  /* Make tables horizontally scrollable only when content overflows */
   .table-container {
     overflow-x: auto;
     margin: 1rem 0;
+    width: 100%;
+  }
+  
+  .table-container::-webkit-scrollbar {
+    height: 6px;
+  }
+  
+  .table-container::-webkit-scrollbar-track {
+    background: var(--lightgray);
+  }
+  
+  .table-container::-webkit-scrollbar-thumb {
+    background: var(--gray);
+    border-radius: 3px;
   }
 }
 
@@ -392,7 +408,6 @@ table.highlight-table tbody tr:hover {
     border-color: var(--darkgray);
   }
 }
-
 
 
 
