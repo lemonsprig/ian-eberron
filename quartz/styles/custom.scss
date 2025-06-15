@@ -230,17 +230,19 @@ table tbody td {
 .section-ul {
   list-style: none;
   padding: 0;
-  margin: 2rem 0; /* Remove auto centering, let container handle it */
+  margin: 2rem 0;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
   width: 100%;
+  align-items: center; /* Center the entire button container */
 }
 
 .section-li {
-  margin: 0 auto; /* Center each button individually */
-  width: 350px; /* Fixed width for all buttons */
-  max-width: 90%; /* Responsive on smaller screens */
+  margin: 0;
+  width: 300px; /* Fixed width for all buttons */
+  display: flex;
+  justify-content: center;
 }
 
 .section {
@@ -250,14 +252,20 @@ table tbody td {
   width: 100%;
 }
 
+.section .desc {
+  width: 100%;
+}
+
 .section .desc h3 {
   margin: 0;
   width: 100%;
 }
 
 .section .desc h3 a {
-  display: block;
-  padding: 14px 20px; /* Consistent padding */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
   background: var(--lightgray);
   border: 1px solid var(--gray);
   border-radius: 8px;
@@ -267,16 +275,12 @@ table tbody td {
   font-size: 1rem;
   transition: all 0.2s ease;
   text-align: center;
-  width: 100%;
+  width: 300px !important; /* Force exact width */
+  height: 50px !important; /* Force exact height */
   box-sizing: border-box;
-  white-space: nowrap; /* Keep text on single line */
+  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; /* Add ... if text too long */
-  height: 48px; /* Fixed height for consistent button size */
-  line-height: 20px; /* Control line spacing */
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  text-overflow: ellipsis;
 }
 
 .section .desc h3 a:hover {
