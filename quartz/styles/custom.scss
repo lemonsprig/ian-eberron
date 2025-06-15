@@ -136,6 +136,17 @@ table {
   table-layout: fixed;
 }
 
+/* Force no scrollbars on tables and their containers */
+table, 
+table * {
+  overflow: visible !important;
+}
+
+/* Remove scrollbars from any parent containers */
+div:has(table) {
+  overflow: visible !important;
+}
+
 /* Consistent 2-column layout */
 table th:nth-child(1),
 table td:nth-child(1) {
