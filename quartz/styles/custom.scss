@@ -230,17 +230,16 @@ table tbody td {
 .section-ul {
   list-style: none;
   padding: 0;
-  margin: 2rem auto;
+  margin: 2rem 0; /* Remove auto centering, let container handle it */
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
   width: 100%;
-  align-items: center; /* Center the list items */
 }
 
 .section-li {
-  margin: 0;
-  width: 400px; /* Fixed width for buttons */
+  margin: 0 auto; /* Center each button individually */
+  width: 350px; /* Fixed width for all buttons */
   max-width: 90%; /* Responsive on smaller screens */
 }
 
@@ -258,14 +257,14 @@ table tbody td {
 
 .section .desc h3 a {
   display: block;
-  padding: 16px 24px;
+  padding: 14px 20px; /* Consistent padding */
   background: var(--lightgray);
   border: 1px solid var(--gray);
   border-radius: 8px;
   text-decoration: none;
   color: var(--darkgray);
   font-weight: 500;
-  font-size: 1.1rem;
+  font-size: 1rem;
   transition: all 0.2s ease;
   text-align: center;
   width: 100%;
@@ -273,6 +272,11 @@ table tbody td {
   white-space: nowrap; /* Keep text on single line */
   overflow: hidden;
   text-overflow: ellipsis; /* Add ... if text too long */
+  height: 48px; /* Fixed height for consistent button size */
+  line-height: 20px; /* Control line spacing */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .section .desc h3 a:hover {
