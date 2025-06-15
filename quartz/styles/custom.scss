@@ -234,40 +234,45 @@ table tbody td {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  max-width: 600px; /* Control button width */
   width: 100%;
+  align-items: center; /* Center the list items */
 }
 
 .section-li {
   margin: 0;
+  width: 400px; /* Fixed width for buttons */
+  max-width: 90%; /* Responsive on smaller screens */
 }
 
 .section {
   display: block;
   padding: 0;
   margin: 0;
+  width: 100%;
 }
 
 .section .desc h3 {
   margin: 0;
+  width: 100%;
 }
 
 .section .desc h3 a {
   display: block;
-  padding: 16px 24px; /* Increased padding for longer buttons */
+  padding: 16px 24px;
   background: var(--lightgray);
   border: 1px solid var(--gray);
   border-radius: 8px;
   text-decoration: none;
   color: var(--darkgray);
   font-weight: 500;
-  font-size: 1.1rem; /* Slightly larger text */
+  font-size: 1.1rem;
   transition: all 0.2s ease;
-  text-align: center; /* Center the text */
-  min-height: 50px; /* Ensure consistent button height */
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+  white-space: nowrap; /* Keep text on single line */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Add ... if text too long */
 }
 
 .section .desc h3 a:hover {
