@@ -284,8 +284,9 @@ table tbody td {
 }
 
 .section .desc h3 a:hover {
-  background: var(--secondary);
-  color: var(--light);
+  background: var(--secondary) !important; /* Force the same color as table header */
+  color: var(--light) !important;
+  border-color: var(--secondary) !important; /* Match border to background */
   transform: translateY(-1px);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -300,29 +301,6 @@ table tbody td {
   display: none;
 }
 
-/* Dark mode support */
-.darkmode table {
-  background: var(--dark);
-  border-color: var(--darkgray);
-}
-
-.darkmode table thead {
-  background: var(--darkgray);
-  color: var(--light);
-}
-
-.darkmode table tbody tr:nth-child(even) {
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.darkmode table tbody tr:hover {
-  background: var(--darkgray);
-}
-
-.darkmode table tbody td {
-  border-color: var(--darkgray);
-}
-
 /* Dark mode for menu buttons */
 .darkmode .section .desc h3 a {
   background: var(--darkgray);
@@ -331,6 +309,7 @@ table tbody td {
 }
 
 .darkmode .section .desc h3 a:hover {
-  background: var(--secondary);
-  color: var(--light);
+  background: var(--secondary) !important; /* Ensure it matches table header in dark mode too */
+  color: var(--light) !important;
+  border-color: var(--secondary) !important;
 }
