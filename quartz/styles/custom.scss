@@ -133,7 +133,7 @@ table {
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  table-layout: fixed;
+  table-layout: auto; /* Changed from fixed to auto for flexible columns */
 }
 
 /* Force no scrollbars on tables and their containers */
@@ -147,15 +147,43 @@ div:has(table) {
   overflow: visible !important;
 }
 
-/* Consistent 2-column layout */
+/* Remove fixed column width rules - let columns size naturally */
+/* OLD RULES REMOVED:
 table th:nth-child(1),
 table td:nth-child(1) {
-  width: 35%; /* Race name column */
+  width: 35%;
 }
 
 table th:nth-child(2),
 table td:nth-child(2) {
-  width: 65%; /* Source column */
+  width: 65%;
+}
+*/
+
+/* NEW: Flexible column sizing that works for any number of columns */
+table th,
+table td {
+  min-width: 120px; /* Minimum width to prevent cramping */
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+/* For 2-column tables, maintain the original proportions */
+table:has(th:nth-child(2):last-child) th:nth-child(1),
+table:has(th:nth-child(2):last-child) td:nth-child(1) {
+  width: 35%;
+}
+
+table:has(th:nth-child(2):last-child) th:nth-child(2),
+table:has(th:nth-child(2):last-child) td:nth-child(2) {
+  width: 65%;
+}
+
+/* For 3+ column tables, distribute evenly */
+table:has(th:nth-child(3)) th,
+table:has(th:nth-child(3)) td {
+  width: auto;
+  text-align: left;
 }
 
 /* Header styling */
@@ -166,10 +194,11 @@ table thead {
 }
 
 table thead th {
-  padding: 6px 10px;
+  padding: 8px 12px; /* Slightly increased padding for better readability */
   text-align: left;
   border-bottom: 2px solid var(--lightgray);
   font-size: 0.95rem;
+  vertical-align: top;
 }
 
 /* Row styling */
@@ -187,8 +216,10 @@ table tbody tr:nth-child(even) {
 }
 
 table tbody td {
-  padding: 4px 10px;
+  padding: 6px 12px; /* Slightly increased padding to match headers */
   border-bottom: 1px solid var(--lightgray);
+  vertical-align: top;
+  line-height: 1.4;
 }
 
 /* Responsive tables */
@@ -199,7 +230,21 @@ table tbody td {
   
   table thead th,
   table tbody td {
-    padding: 4px 6px;
+    padding: 4px 8px;
+    min-width: 80px; /* Smaller minimum width on mobile */
+  }
+  
+  /* On mobile, allow horizontal scroll if needed for wide tables */
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  
+  table thead,
+  table tbody {
+    display: table;
+    width: 100%;
   }
 }
 
