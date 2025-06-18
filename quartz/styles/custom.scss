@@ -189,7 +189,7 @@ table:has(th:nth-child(3)) td {
 /* Header styling */
 table thead {
   background: var(--secondary);
-  color: var(--light);
+  color: var(--light) !important;
   font-weight: 600;
 }
 
@@ -199,6 +199,8 @@ table thead th {
   border-bottom: 2px solid var(--lightgray);
   font-size: 0.95rem;
   vertical-align: top;
+  color: var(--light) !important; /* Force white text on headers */
+  font-weight: 700; /* Make text slightly bolder for better contrast */
 }
 
 /* Row styling */
