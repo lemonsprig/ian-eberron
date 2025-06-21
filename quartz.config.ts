@@ -89,7 +89,15 @@ const config: QuartzConfig = {
           Component.MobileOnly(Component.Spacer()),
           Component.Search(),
           Component.Darkmode(),
-          Component.DesktopOnly(Component.Explorer()),
+
+          //Component.DesktopOnly(Component.Explorer()),
+          Component.DesktopOnly(Component.Explorer({
+            sortFn: (a, b) => {
+              // Sort by actual filename instead of display name
+              return a.file.slug.localeCompare(b.file.slug);
+            },
+          })),
+
         ],
         right: [
           Component.Graph(),
