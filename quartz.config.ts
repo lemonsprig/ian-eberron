@@ -100,6 +100,7 @@ const config: QuartzConfig = {
                   numeric: true,
                   sensitivity: "base",
                 })
+                console.log(a.slug)
               }
               // One is folder, one is file - folder comes first
               if (!a.isFolder && b.isFolder) {
