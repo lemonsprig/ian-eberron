@@ -89,7 +89,17 @@ const config: QuartzConfig = {
           Component.MobileOnly(Component.Spacer()),
           Component.Search(),
           Component.Darkmode(),
-          Component.DesktopOnly(Component.Explorer()),
+          Component.DesktopOnly(Component.Explorer({
+            sortFn: (a, b) => {
+              // Sort by weight first, then by title
+              const aWeight = a.frontmatter?.weight ?? 999;
+              const bWeight = b.frontmatter?.weight ?? 999;
+              if (aWeight !== bWeight) {
+                return aWeight - bWeight;
+              }
+              return a.displayName.localeCompare(b.displayName);
+            },
+          })),
         ],
         right: [
           Component.Graph(),
@@ -97,7 +107,17 @@ const config: QuartzConfig = {
           Component.Backlinks(),
         ],
       }),
-      Plugin.FolderPage(),
+      Plugin.FolderPage({
+        sortFn: (a, b) => {
+          // Sort by weight first, then by title
+          const aWeight = a.frontmatter?.weight ?? 999;
+          const bWeight = b.frontmatter?.weight ?? 999;
+          if (aWeight !== bWeight) {
+            return aWeight - bWeight;
+          }
+          return a.displayName.localeCompare(b.displayName);
+        },
+      }),
       Plugin.TagPage(),
       Plugin.ContentIndex({
         enableSiteMap: true,
