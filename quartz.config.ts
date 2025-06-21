@@ -96,7 +96,7 @@ const config: QuartzConfig = {
               // First sort by whether it's a folder or file (folders first)
               if ((!a.isFolder && !b.isFolder) || (a.isFolder && b.isFolder)) {
                 // Both are folders or both are files - sort by slug (filename)
-                return a.slug.localeCompare(b.slug, undefined, {
+                return a.slugSegment.localeCompare(b.slugSegment, undefined, {
                   numeric: true,
                   sensitivity: "base",
                 })
