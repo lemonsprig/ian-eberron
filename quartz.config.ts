@@ -93,8 +93,20 @@ const config: QuartzConfig = {
           //Component.DesktopOnly(Component.Explorer()),
           Component.DesktopOnly(Component.Explorer({
             sortFn: (a, b) => {
-              // Sort by actual filename instead of display name
-              return a.file.slug.localeCompare(b.file.slug);
+              // First sort by whether it's a folder or file (folders first)
+              if ((!a.isFolder && !b.isFolder) || (a.isFolder && b.isFolder)) {
+                // Both are folders or both are files - sort by slug (filename)
+                return a.slug.localeCompare(b.slug, undefined, {
+                  numeric: true,
+                  sensitivity: "base",
+                })
+              }
+              // One is folder, one is file - folder comes first
+              if (!a.isFolder && b.isFolder) {
+                return 1
+              } else {
+                return -1
+              }
             },
           })),
 
