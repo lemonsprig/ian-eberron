@@ -39,10 +39,100 @@
         .leaflet-control-zoom a:hover {
             background-color: #e9c46a !important;
         }
+        
+        /* Custom control styling */
+        .custom-control {
+            background-color: #f4f1de !important;
+            border: 2px solid #8B4513 !important;
+            border-radius: 4px !important;
+            width: 34px !important;
+            height: 34px !important;
+            cursor: pointer !important;
+            font-size: 16px !important;
+            text-align: center !important;
+            line-height: 30px !important;
+            margin-bottom: 5px !important;
+        }
+        
+        .custom-control:hover {
+            background-color: #e9c46a !important;
+        }
+        
+        .custom-control.active {
+            background-color: #e9c46a !important;
+            box-shadow: 0 0 5px rgba(139, 69, 19, 0.5) !important;
+        }
+        
+        /* Coordinate display */
+        .coordinate-display {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 12px;
+            border-radius: 4px;
+            border: 2px solid #8B4513;
+            font-family: monospace;
+            font-size: 12px;
+            z-index: 1000;
+            min-width: 150px;
+        }
+        
+        /* Modal for marker text input */
+        .marker-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid #8B4513;
+            z-index: 2000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        
+        .marker-modal input {
+            width: 200px;
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #8B4513;
+            border-radius: 4px;
+        }
+        
+        .marker-modal button {
+            padding: 8px 16px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .marker-modal .confirm {
+            background-color: #e9c46a;
+            color: #8B4513;
+        }
+        
+        .marker-modal .cancel {
+            background-color: #ccc;
+        }
+        
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1999;
+        }
     </style>
 </head>
 <body>
     <div id="map"></div>
+    <div id="coordinates" class="coordinate-display">
+        Hover to see coordinates
+    </div>
     
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
             integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
@@ -75,7 +165,7 @@
             var bounds = [[0, 0], [4837, 7680]];
             
             // Add image overlay
-            var imageUrl = '../images/True and Accurate Map of Khorvaire - Eberron - DM vers sv.jpg';
+            var imageUrl = '../images/True and Accurate Map of Khorvaire - Eberron_sv_player.jpg';
             
             var imageOverlay = L.imageOverlay(imageUrl, bounds, {
                 opacity: 1.0,
@@ -139,55 +229,146 @@
                 imperial: true
             }).addTo(map);
             
-            // Measurement functionality variables
-            var measurementMode = false;
+            // Tool state variables
+            var currentTool = 'none';
             var measurementPoints = [];
             var measurementLines = [];
             var measurementMarkers = [];
+            var drawingPoints = [];
+            var currentDrawing = null;
+            var userMarkers = [];
+            var userShapes = [];
             
-            // Create measurement toggle button
-            var MeasurementControl = L.Control.extend({
-                onAdd: function(map) {
-                    var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
-                    container.style.backgroundColor = '#f4f1de';
-                    container.style.width = '30px';
-                    container.style.height = '30px';
-                    container.style.cursor = 'pointer';
-                    container.title = 'Toggle Measurement Mode';
-                    container.innerHTML = '📏';
-                    container.style.fontSize = '16px';
-                    container.style.textAlign = 'center';
-                    container.style.lineHeight = '30px';
-                    
-                    // Prevent clicks from propagating to the map
-                    L.DomEvent.disableClickPropagation(container);
-                    L.DomEvent.disableScrollPropagation(container);
-                    
-                    container.onclick = function(e) {
-                        // Prevent event from bubbling up to the map
-                        e.stopPropagation();
-                        e.preventDefault();
-                        
-                        measurementMode = !measurementMode;
-                        if (measurementMode) {
-                            container.style.backgroundColor = '#e9c46a';
-                            container.innerHTML = '📏✓';
-                            map.getContainer().style.cursor = 'crosshair';
-                        } else {
-                            container.style.backgroundColor = '#f4f1de';
-                            container.innerHTML = '📏';
-                            map.getContainer().style.cursor = '';
-                            clearMeasurements();
-                        }
-                    }
-                    
-                    return container;
-                }
+            // Coordinate display
+            var coordinateDisplay = document.getElementById('coordinates');
+            
+            map.on('mousemove', function(e) {
+                var lat = e.latlng.lat.toFixed(0);
+                var lng = e.latlng.lng.toFixed(0);
+                coordinateDisplay.innerHTML = 'Coordinates: [' + lat + ', ' + lng + ']';
             });
             
-            map.addControl(new MeasurementControl({ position: 'topleft' }));
+            // Create custom control class
+            function createCustomControl(position, icon, title, clickHandler) {
+                var CustomControl = L.Control.extend({
+                    onAdd: function(map) {
+                        var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control custom-control');
+                        container.title = title;
+                        container.innerHTML = icon;
+                        
+                        L.DomEvent.disableClickPropagation(container);
+                        L.DomEvent.disableScrollPropagation(container);
+                        
+                        container.onclick = function(e) {
+                            e.stopPropagation();
+                            e.preventDefault();
+                            clickHandler(container);
+                        }
+                        
+                        return container;
+                    }
+                });
+                return new CustomControl({ position: position });
+            }
             
-            // Clear all measurements
+            // Tool activation helper
+            function activateTool(toolName, button) {
+                // Deactivate all tools
+                currentTool = 'none';
+                document.querySelectorAll('.custom-control').forEach(function(btn) {
+                    btn.classList.remove('active');
+                });
+                map.getContainer().style.cursor = '';
+                
+                // Clear any ongoing drawings
+                if (currentDrawing) {
+                    currentDrawing = null;
+                    drawingPoints = [];
+                }
+                
+                // Activate selected tool
+                if (toolName !== 'none') {
+                    currentTool = toolName;
+                    button.classList.add('active');
+                    
+                    if (toolName === 'measure' || toolName === 'marker' || toolName === 'polygon' || toolName === 'polyline') {
+                        map.getContainer().style.cursor = 'crosshair';
+                    }
+                }
+            }
+            
+            // Measurement tool
+            map.addControl(createCustomControl('topleft', '📏', 'Measurement Tool', function(button) {
+                if (currentTool === 'measure') {
+                    activateTool('none', button);
+                    clearMeasurements();
+                } else {
+                    activateTool('measure', button);
+                }
+            }));
+            
+            // Marker placement tool
+            map.addControl(createCustomControl('topleft', '📍', 'Place Custom Marker', function(button) {
+                if (currentTool === 'marker') {
+                    activateTool('none', button);
+                } else {
+                    activateTool('marker', button);
+                }
+            }));
+            
+            // Polygon drawing tool
+            map.addControl(createCustomControl('topleft', '⬟', 'Draw Polygon', function(button) {
+                if (currentTool === 'polygon') {
+                    activateTool('none', button);
+                    cancelCurrentDrawing();
+                } else {
+                    activateTool('polygon', button);
+                }
+            }));
+            
+            // Polyline drawing tool
+            map.addControl(createCustomControl('topleft', '📏', 'Draw Line', function(button) {
+                if (currentTool === 'polyline') {
+                    activateTool('none', button);
+                    cancelCurrentDrawing();
+                } else {
+                    activateTool('polyline', button);
+                }
+            }));
+            
+            // Rectangle drawing tool
+            map.addControl(createCustomControl('topleft', '⬛', 'Draw Rectangle', function(button) {
+                if (currentTool === 'rectangle') {
+                    activateTool('none', button);
+                } else {
+                    activateTool('rectangle', button);
+                }
+            }));
+            
+            // Circle drawing tool
+            map.addControl(createCustomControl('topleft', '⭕', 'Draw Circle', function(button) {
+                if (currentTool === 'circle') {
+                    activateTool('none', button);
+                } else {
+                    activateTool('circle', button);
+                }
+            }));
+            
+            // Clear all tool
+            map.addControl(createCustomControl('topleft', '🗑️', 'Clear All User Elements', function(button) {
+                clearAllUserElements();
+            }));
+            
+            // Get coordinates tool
+            map.addControl(createCustomControl('topleft', '📍', 'Get Coordinates (Click)', function(button) {
+                if (currentTool === 'coordinates') {
+                    activateTool('none', button);
+                } else {
+                    activateTool('coordinates', button);
+                }
+            }));
+            
+            // Helper functions
             function clearMeasurements() {
                 measurementPoints = [];
                 measurementLines.forEach(function(line) {
@@ -200,26 +381,78 @@
                 measurementMarkers = [];
             }
             
-            // Calculate distance between two points (in pixels for simple CRS)
+            function clearAllUserElements() {
+                clearMeasurements();
+                userMarkers.forEach(function(marker) {
+                    map.removeLayer(marker);
+                });
+                userShapes.forEach(function(shape) {
+                    map.removeLayer(shape);
+                });
+                userMarkers = [];
+                userShapes = [];
+                cancelCurrentDrawing();
+            }
+            
+            function cancelCurrentDrawing() {
+                if (currentDrawing) {
+                    map.removeLayer(currentDrawing);
+                    currentDrawing = null;
+                }
+                drawingPoints = [];
+            }
+            
             function calculateDistance(point1, point2) {
                 var dx = point2.lng - point1.lng;
                 var dy = point2.lat - point1.lat;
                 return Math.sqrt(dx * dx + dy * dy);
             }
             
-            // Convert pixel distance to approximate miles (adjust scale as needed)
             function pixelsToMiles(pixels) {
-                // This is an approximation - adjust the scale factor based on your map
-                var scaleFactorMilesPerPixel = 0.5; // Adjust this based on your map's scale
+                var scaleFactorMilesPerPixel = 0.5;
                 return pixels * scaleFactorMilesPerPixel;
             }
             
-            // Handle map clicks for measurement
+            function showMarkerModal(latlng, callback) {
+                var overlay = document.createElement('div');
+                overlay.className = 'modal-overlay';
+                
+                var modal = document.createElement('div');
+                modal.className = 'marker-modal';
+                modal.innerHTML = 
+                    '<h3>Add Marker</h3>' +
+                    '<input type="text" id="markerTitle" placeholder="Marker title" /><br>' +
+                    '<input type="text" id="markerDesc" placeholder="Description (optional)" /><br>' +
+                    '<button class="confirm" onclick="confirmMarker()">Add Marker</button>' +
+                    '<button class="cancel" onclick="cancelMarker()">Cancel</button>';
+                
+                document.body.appendChild(overlay);
+                document.body.appendChild(modal);
+                document.getElementById('markerTitle').focus();
+                
+                window.confirmMarker = function() {
+                    var title = document.getElementById('markerTitle').value || 'Custom Marker';
+                    var desc = document.getElementById('markerDesc').value || '';
+                    document.body.removeChild(overlay);
+                    document.body.removeChild(modal);
+                    callback(title, desc);
+                    delete window.confirmMarker;
+                    delete window.cancelMarker;
+                }
+                
+                window.cancelMarker = function() {
+                    document.body.removeChild(overlay);
+                    document.body.removeChild(modal);
+                    delete window.confirmMarker;
+                    delete window.cancelMarker;
+                }
+            }
+            
+            // Main click handler
             map.on('click', function(e) {
-                if (measurementMode) {
+                if (currentTool === 'measure') {
                     measurementPoints.push(e.latlng);
                     
-                    // Add a marker at the clicked point
                     var marker = L.circleMarker(e.latlng, {
                         color: '#e74c3c',
                         fillColor: '#e74c3c',
@@ -228,7 +461,6 @@
                     }).addTo(map);
                     measurementMarkers.push(marker);
                     
-                    // If we have two points, draw a line and show distance
                     if (measurementPoints.length >= 2) {
                         var lastTwo = measurementPoints.slice(-2);
                         var line = L.polyline(lastTwo, {
@@ -240,11 +472,9 @@
                         
                         measurementLines.push(line);
                         
-                        // Calculate and display distance
                         var distance = calculateDistance(lastTwo[0], lastTwo[1]);
                         var miles = pixelsToMiles(distance);
                         
-                        // Add distance label at midpoint
                         var midpoint = L.latLng(
                             (lastTwo[0].lat + lastTwo[1].lat) / 2,
                             (lastTwo[0].lng + lastTwo[1].lng) / 2
@@ -262,11 +492,93 @@
                         }).addTo(map);
                         
                         measurementMarkers.push(distanceMarker);
-                        
-                        console.log('Distance:', distance.toFixed(2), 'pixels,', miles.toFixed(2), 'miles (approximate)');
                     }
-                } else {
-                    console.log('Clicked at coordinates:', e.latlng);
+                    
+                } else if (currentTool === 'marker') {
+                    showMarkerModal(e.latlng, function(title, description) {
+                        var marker = L.marker(e.latlng).addTo(map);
+                        marker.bindPopup(
+                            '<div class="custom-popup">' + title + '</div>' +
+                            (description ? '<div class="popup-description">' + description + '</div>' : ''),
+                            { maxWidth: 250 }
+                        );
+                        userMarkers.push(marker);
+                    });
+                    
+                } else if (currentTool === 'coordinates') {
+                    var lat = e.latlng.lat.toFixed(0);
+                    var lng = e.latlng.lng.toFixed(0);
+                    alert('Coordinates: [' + lat + ', ' + lng + ']');
+                    
+                } else if (currentTool === 'polygon') {
+                    drawingPoints.push(e.latlng);
+                    
+                    if (drawingPoints.length === 1) {
+                        // Start polygon
+                        currentDrawing = L.polygon([e.latlng], {
+                            color: '#3388ff',
+                            fillOpacity: 0.3
+                        }).addTo(map);
+                    } else {
+                        // Update polygon
+                        currentDrawing.setLatLngs(drawingPoints);
+                    }
+                    
+                } else if (currentTool === 'polyline') {
+                    drawingPoints.push(e.latlng);
+                    
+                    if (drawingPoints.length === 1) {
+                        // Start polyline
+                        currentDrawing = L.polyline([e.latlng], {
+                            color: '#3388ff',
+                            weight: 3
+                        }).addTo(map);
+                    } else {
+                        // Update polyline
+                        currentDrawing.setLatLngs(drawingPoints);
+                    }
+                    
+                } else if (currentTool === 'rectangle') {
+                    if (!currentDrawing) {
+                        // Start rectangle
+                        currentDrawing = { startPoint: e.latlng };
+                    } else {
+                        // Finish rectangle
+                        var bounds = L.latLngBounds(currentDrawing.startPoint, e.latlng);
+                        var rectangle = L.rectangle(bounds, {
+                            color: '#3388ff',
+                            fillOpacity: 0.3
+                        }).addTo(map);
+                        userShapes.push(rectangle);
+                        currentDrawing = null;
+                    }
+                    
+                } else if (currentTool === 'circle') {
+                    if (!currentDrawing) {
+                        // Start circle
+                        currentDrawing = { center: e.latlng };
+                    } else {
+                        // Finish circle
+                        var radius = calculateDistance(currentDrawing.center, e.latlng);
+                        var circle = L.circle(currentDrawing.center, {
+                            radius: radius,
+                            color: '#3388ff',
+                            fillOpacity: 0.3
+                        }).addTo(map);
+                        userShapes.push(circle);
+                        currentDrawing = null;
+                    }
+                }
+            });
+            
+            // Double-click to finish polygon/polyline
+            map.on('dblclick', function(e) {
+                if (currentTool === 'polygon' || currentTool === 'polyline') {
+                    if (currentDrawing && drawingPoints.length > 2) {
+                        userShapes.push(currentDrawing);
+                        currentDrawing = null;
+                        drawingPoints = [];
+                    }
                 }
             });
             
@@ -276,7 +588,7 @@
                 alert('Map image failed to load. Please check the image path.');
             });
             
-            console.log('Enhanced map setup complete with', locations.length, 'locations and measurement tools');
+            console.log('Enhanced map setup complete with drawing tools');
         }
         
         // Start initialization when page loads
