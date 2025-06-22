@@ -144,6 +144,7 @@
             var measurementPoints = [];
             var measurementLines = [];
             var measurementMarkers = [];
+            var justToggledMeasurement = false;
             
             // Create measurement toggle button
             var MeasurementControl = L.Control.extend({
@@ -208,6 +209,12 @@
             
             // Handle map clicks for measurement
             map.on('click', function(e) {
+                // Ignore clicks immediately after toggling measurement mode
+                if (justToggledMeasurement) {
+                    console.log('Ignoring click right after toggle');
+                    return;
+                }
+                
                 if (measurementMode) {
                     measurementPoints.push(e.latlng);
                     
