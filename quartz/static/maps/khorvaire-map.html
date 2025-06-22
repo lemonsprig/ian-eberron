@@ -144,7 +144,6 @@
             var measurementPoints = [];
             var measurementLines = [];
             var measurementMarkers = [];
-            var justToggledMeasurement = false;
             
             // Create measurement toggle button
             var MeasurementControl = L.Control.extend({
@@ -160,7 +159,15 @@
                     container.style.textAlign = 'center';
                     container.style.lineHeight = '30px';
                     
-                    container.onclick = function(){
+                    // Prevent clicks from propagating to the map
+                    L.DomEvent.disableClickPropagation(container);
+                    L.DomEvent.disableScrollPropagation(container);
+                    
+                    container.onclick = function(e) {
+                        // Prevent event from bubbling up to the map
+                        e.stopPropagation();
+                        e.preventDefault();
+                        
                         measurementMode = !measurementMode;
                         if (measurementMode) {
                             container.style.backgroundColor = '#e9c46a';
@@ -209,12 +216,6 @@
             
             // Handle map clicks for measurement
             map.on('click', function(e) {
-                // Ignore clicks immediately after toggling measurement mode
-                if (justToggledMeasurement) {
-                    console.log('Ignoring click right after toggle');
-                    return;
-                }
-                
                 if (measurementMode) {
                     measurementPoints.push(e.latlng);
                     
